@@ -57,6 +57,8 @@ def calculate_delay(a,b,c,d,e,f):
 
     return totaldelay
 ls4=[]
+routpath=[]
+
 
 while(j<149):
     n=j+1
@@ -64,6 +66,7 @@ while(j<149):
     a=float(ls1[0])
     b=float(ls1[1])
     c=float(ls1[2])
+    l=0
     for k in range(n,149):
         ls2=ls[n][2:5]
         d=float(ls2[0])
@@ -78,10 +81,23 @@ while(j<149):
         d2=a1+a3
         d3=a1+a4
         d4=a1+a5
-        k=min(d1,d2,d3,d4)
-        if(k<x):
-            ls4.append(k)
-            x=k
+        j1=min(d1,d2,d3,d4)
+        if(j1<x):
+            if(j1==d1  or j1==d3):
+                routpath.append([n,j,'LHR'])
+            elif(j1==d2 or j1==d4):
+                routpath.append([n,j,'EWR'])
+
+
+
+
+
+
+
+            ls4.append(j1)
+            x=j1
+
+        
 
     x=sys.maxsize        
     j+=1
@@ -118,7 +134,8 @@ while(i<149):
     i+=1
 minimum_data_latency=min(ls4)
 maximum_transmission_data=max(ls3)
-
+print(routpath)
 
 print(ls4.index(minimum_data_latency))
 print(ls3.index(maximum_transmission_data))
+print(len(routpath))
